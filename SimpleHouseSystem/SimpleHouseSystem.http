@@ -1,0 +1,14 @@
+@SimpleHouseSystem_HostAddress = http://localhost:7184
+
+GET {{SimpleHouseSystem_HostAddress}}/House/
+Accept: application/json
+
+POST {{SimpleHouseSystem_HostAddress}}/House/
+Accept: application/json
+
+PUT {{SimpleHouseSystem_HostAddress}}/House/
+Accept: application/json
+
+DELETE {{SimpleHouseSystem_HostAddress}}/House/
+Accept: application/json
+###

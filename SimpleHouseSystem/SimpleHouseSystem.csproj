@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="SimpleHouseSystem.http" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Dapper" Version="2.0.90" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Negotiate" Version="8.0.0" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.1" />

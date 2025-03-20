@@ -1,5 +1,7 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.IdentityModel.Tokens;
 using SimpleHouseSystem.Models;
+using SimpleHouseSystem.Repository;
 using SimpleHouseSystem.Repository.Interface;
 using SimpleHouseSystem.Service.Interface;
 
@@ -24,35 +26,32 @@ public class HouseService: IHouseService
         return _houseRepository.GetHouse(cityName, upperPrice, lowerSquareMeters, upperSquareMeters);
     }
 
-    public void insertHouseInfo(string cityName, int price, double squareMeters)
-    { 
-        var house = new HouseModel();
-        house.CityName = cityName;
-        house.Price = price;
-        house.SquareMeters = squareMeters;
+
+
+    public void InsertHouseInfo(HouseModel house)
+    {
+        house.HouseId = _houseRepository.GetLastHouseId();
         _houseRepository.InsertHouse(house);
     }
 
-    public void updateHouseInfo(int houseId, string cityName, int price, double squareMeters)
+    public int UpdateHouseInfo(HouseModel house)
     {
-        var house = new HouseModel();
-        house.HouseId = houseId;
-        if (!cityName.IsNullOrEmpty())
+        if (CheckHouseExist(house.HouseId))
         {
-            house.CityName = cityName;        
+            _houseRepository.UpdateHouse(house);
+            return 0;
         }
-        if (price > 0)
-        { 
-            house.Price = price;            
-        }
-        if (squareMeters > 0)
-        { 
-            house.SquareMeters = squareMeters;            
-        }
-        _houseRepository.UpdateHouse(house);
+
+        return 1;
     }
-    public void deleteHouseInfo(int houseId)
+    public void DeleteHouseInfo(int houseId)
     {
         _houseRepository.DeleteHouse(houseId);
+    }
+
+    private bool CheckHouseExist(int houseId)
+    {
+        HouseModel house = _houseRepository.GetHouseById(houseId);
+        return house != null;
     }
 }

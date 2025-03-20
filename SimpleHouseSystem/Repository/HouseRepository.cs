@@ -1,6 +1,7 @@
 ﻿using System.Data.Common;
 using System.Linq;
 using System.Reflection.Metadata;
+using System.Security.Cryptography;
 using Dapper;
 using Microsoft.Data.SqlClient;
 using Microsoft.IdentityModel.Tokens;
@@ -23,6 +24,26 @@ public class HouseRepository : IHouseRepository
         {
             var result = conn.Query<HouseModel>("SELECT * FROM House Where HouseId > 0");
             return (List<HouseModel>)result;
+        }
+    }
+
+    public int GetLastHouseId()
+    {
+        using (var conn = new SqlConnection(_connectString))
+        {
+            var result = conn.QueryFirstOrDefault<int>("select max(HouseId) from house Where HouseId > 0");
+            return result;
+        }
+    }
+
+    public HouseModel GetHouseById(int houseId)
+    {
+        using (var conn = new SqlConnection(_connectString))
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("HouseId", houseId);
+            var result = conn.QueryFirstOrDefault<HouseModel>("select max(HouseId) from house Where HouseId = @HouseId");
+            return result;
         }
     }
 
@@ -76,6 +97,7 @@ public class HouseRepository : IHouseRepository
         (
             [HouseId]
            ,[CityName]
+           ,[Address]
            ,[SquareMeters]
            ,[Price]
         ) 
@@ -83,6 +105,7 @@ public class HouseRepository : IHouseRepository
         (
             @HouseId
            ,@CityName
+           ,@Address
            ,@SquareMeters
            ,@Price
         );
@@ -104,6 +127,7 @@ public class HouseRepository : IHouseRepository
         SET 
              [CityName] = @CityName
             ,[SquareMeters] = @SquareMeters
+            ,[Address] = @Address
             ,[Price] = @Price
         WHERE 
             HouseId = @HouseId

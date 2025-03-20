@@ -18,35 +18,73 @@ namespace SimpleHouseSystem.Controllers
             _houseService = houseService;
         }
 
-        // GET api/values
-        [HttpGet]
-        public List<HouseModel> test()
+        /// <summary>
+        /// 查詢所有房屋
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet(Name = "GetHouseList")]
+        public List<HouseModel> Get()
         {
             return _houseService.GetAllHouse();
         }
 
-        // GET api/values/5
-        public List<HouseModel> Get(int id)
+        /// <summary>
+        /// 查詢符合條件的房屋
+        /// </summary>
+        /// <param name="cityName">城市名稱</param>
+        /// <param name="upperPrice">最高價格</param>
+        /// <param name="lowerSquareMeters">最低坪數</param>
+        /// <param name="upperSquareMeters">最高坪數</param>
+        /// <returns></returns>
+        [HttpGet]
+        public List<HouseModel> Get([FromBody] string cityName, int upperPrice, double lowerSquareMeters, double upperSquareMeters)
         {
-            return new List<HouseModel>();
+            return _houseService.GetHouse(cityName, upperPrice, lowerSquareMeters, upperSquareMeters);
         }
 
-        // POST api/values
-        public void Post([FromBody] string value)
+        /// <summary>
+        /// 新增房屋相關資訊
+        /// </summary>
+        /// <param name="house">房屋相關資訊</param>
+        /// <returns></returns>
+        [HttpPost]
+        public IActionResult Insert([FromBody] HouseModel house)
         {
-
+            _houseService.InsertHouseInfo(house);
+            return Ok();
         }
 
-        // PUT api/values/5
-        public void Put(int id, [FromBody] string value)
+        /// <summary>
+        /// 更新房屋相關資訊
+        /// </summary>
+        /// <param name="houseIdid">房屋編號</param>
+        /// <param name="house">房屋相關資訊</param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("{houseIdid}")]
+        public IActionResult Update(
+            [FromRoute] int houseIdid,
+            [FromBody] HouseModel house)
         {
-
+            int status = _houseService.UpdateHouseInfo(house);
+            if (status == 1)
+            {
+                return NotFound();
+            }
+            return Ok();
         }
 
-        // DELETE api/values/5
-        public void Delete(int id)
+        /// <summary>
+        /// 刪除房屋相關資訊
+        /// </summary>
+        /// <param name="houseId">房屋編號</param>
+        /// <returns></returns>
+        [HttpDelete]
+        [Route("{houseId}")]
+        public IActionResult Delete([FromRoute] int houseId)
         {
-
+            _houseService.DeleteHouseInfo(houseId);
+            return Ok();
         }
     }
 }

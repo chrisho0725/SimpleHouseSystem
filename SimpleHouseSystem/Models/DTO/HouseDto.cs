@@ -4,9 +4,10 @@
     {
         public int HouseId { get; set; }
         public string CityName { get; set; }
-        public int UnitPrice { get; set; }
-        public double SquareMeters { get; set; }
+        public int UpperPrice { get; set; }
+        public int LowerPrice { get; set; }
+        public double UpperSquareMeters { get; set; }
 
-        public double Price { get; set; }
+        public double LowerSquareMeters { get; set; }
     }
 }

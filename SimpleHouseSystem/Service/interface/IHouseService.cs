@@ -7,8 +7,8 @@ namespace SimpleHouseSystem.Service.Interface
     {
         List<HouseModel> GetAllHouse();
         List<HouseModel> GetHouse(string cityName, int upperPrice, double lowerSquareMeters, double upperSquareMeters);
-        void insertHouseInfo(string cityName, int price, double squareMeters);
-        void updateHouseInfo(int houseId, string cityName, int price, double squareMeters);
-        void deleteHouseInfo(int houseId);
+        void InsertHouseInfo(HouseModel house);
+        int UpdateHouseInfo(HouseModel house);
+        void DeleteHouseInfo(int houseId);
     }
 }

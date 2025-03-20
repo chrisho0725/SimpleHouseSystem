@@ -19,16 +19,6 @@ namespace SimpleHouseSystem.Controllers
         }
 
         /// <summary>
-        /// 查詢所有房屋
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet(Name = "GetHouseList")]
-        public List<HouseModel> Get()
-        {
-            return _houseService.GetAllHouse();
-        }
-
-        /// <summary>
         /// 查詢符合條件的房屋
         /// </summary>
         /// <param name="cityName">城市名稱</param>
@@ -57,13 +47,13 @@ namespace SimpleHouseSystem.Controllers
         /// <summary>
         /// 更新房屋相關資訊
         /// </summary>
-        /// <param name="houseIdid">房屋編號</param>
+        /// <param name="houseId">房屋編號</param>
         /// <param name="house">房屋相關資訊</param>
         /// <returns></returns>
         [HttpPut]
-        [Route("{houseIdid}")]
+        [Route("{houseId}")]
         public IActionResult Update(
-            [FromRoute] int houseIdid,
+            [FromRoute] int houseId,
             [FromBody] HouseModel house)
         {
             int status = _houseService.UpdateHouseInfo(house);

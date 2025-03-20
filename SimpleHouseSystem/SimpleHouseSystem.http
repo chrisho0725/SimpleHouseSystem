@@ -1,14 +1,6 @@
-@SimpleHouseSystem_HostAddress = http://localhost:7184
+@SimpleHouseSystem_HostAddress = http://localhost:5202
 
-GET {{SimpleHouseSystem_HostAddress}}/House/
+GET {{SimpleHouseSystem_HostAddress}}/api/House/
 Accept: application/json
 
-POST {{SimpleHouseSystem_HostAddress}}/House/
-Accept: application/json
-
-PUT {{SimpleHouseSystem_HostAddress}}/House/
-Accept: application/json
-
-DELETE {{SimpleHouseSystem_HostAddress}}/House/
-Accept: application/json
 ###

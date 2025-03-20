@@ -27,7 +27,7 @@ namespace SimpleHouseSystem.Controllers
         /// <param name="upperSquareMeters">最高坪數</param>
         /// <returns></returns>
         [HttpGet]
-        public List<HouseModel> Get([FromBody] string cityName, int upperPrice, double lowerSquareMeters, double upperSquareMeters)
+        public List<HouseModel> Get(string cityName, int upperPrice, double lowerSquareMeters, double upperSquareMeters)
         {
             return _houseService.GetHouse(cityName, upperPrice, lowerSquareMeters, upperSquareMeters);
         }

@@ -1,4 +1,5 @@
 ﻿using SimpleHouseSystem.Models;
+using SimpleHouseSystem.Models.DTO;
 
 namespace SimpleHouseSystem.Repository.Interface;
 public interface IHouseRepository

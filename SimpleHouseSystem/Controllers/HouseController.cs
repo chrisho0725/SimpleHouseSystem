@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SimpleHouseSystem.Models;
+using SimpleHouseSystem.Models.DTO;
 using SimpleHouseSystem.Service;
 using SimpleHouseSystem.Service.Interface;
 
